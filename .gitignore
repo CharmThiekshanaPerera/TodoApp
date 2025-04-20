@@ -1,0 +1,81 @@
+# Ignore build results
+bin/
+obj/
+AppPackages/
+TestResults/
+*.user
+*.lock.json
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# MAUI Android
+platforms/android/app/build/
+**/android/.gradle/
+**/android/.idea/
+**/android/local.properties
+**/android/.cxx/
+**/android/captures/
+**/android/.externalNativeBuild/
+**/android/.vs/
+
+# MAUI iOS
+platforms/ios/DerivedData/
+**/ios/build/
+**/ios/*.xcuserstate
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/.dart_tool/
+
+# MAUI Windows
+platforms/windows/bin/
+platforms/windows/obj/
+
+# Configuration files
+appsettings.Development.json
+appsettings.*.json
+
+# NuGet Packages
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# User secrets
+secrets.json
+
+# JetBrains Rider
+.idea/
+
+# Xamarin related
+*.apk
+*.ap_
+*.aab
+*.ipa
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# macOS files
+*.DS_Store
+
+# Android keystore files (if any, generated locally)
+*.keystore
