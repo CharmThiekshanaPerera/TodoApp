@@ -11,15 +11,12 @@ namespace TodoApp.ViewModels
         public ObservableCollection<TodoItem> Todos { get; set; } = new();
 
         [ObservableProperty]
-        private string newTodoText;
+        private string newTodoText = string.Empty;
 
         public MainViewModel()
         {
-            // Initialize newTodoText to avoid nullability issues
-            newTodoText = string.Empty;
-
-            // Sample data
             Todos.Add(new TodoItem { Title = "Learn MAUI", IsCompleted = false });
+            Todos.Add(new TodoItem { Title = "Do groceries", IsCompleted = true });
         }
 
         [RelayCommand]
@@ -42,6 +39,38 @@ namespace TodoApp.ViewModels
         private void ToggleComplete(TodoItem item)
         {
             item.IsCompleted = !item.IsCompleted;
+
+            // Optional: force refresh UI
+            var index = Todos.IndexOf(item);
+            Todos.RemoveAt(index);
+            Todos.Insert(index, item);
+        }
+
+        [RelayCommand]
+        private async Task EditTodo(TodoItem item)
+        {
+            if (item == null) return;
+
+            var mainPage = Application.Current?.Windows.FirstOrDefault()?.Page;
+            if (mainPage == null) return;
+
+            string result = await mainPage.DisplayPromptAsync(
+                "Edit Task",
+                "Update the task title:",
+                initialValue: item.Title
+            );
+
+            if (!string.IsNullOrWhiteSpace(result))
+            {
+                item.Title = result;
+
+                // Optional: force UI update
+                var index = Todos.IndexOf(item);
+                Todos.RemoveAt(index);
+                Todos.Insert(index, item);
+            }
         }
     }
 }
+// Compare this snippet from AppShell.xaml.cs:
+// using System;
