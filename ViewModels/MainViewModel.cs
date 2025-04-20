@@ -1,8 +1,7 @@
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using TodoApp.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TodoApp.Models;
 
 namespace TodoApp.ViewModels
 {
@@ -16,7 +15,6 @@ namespace TodoApp.ViewModels
         public MainViewModel()
         {
             Todos.Add(new TodoItem { Title = "Learn MAUI", IsCompleted = false });
-            Todos.Add(new TodoItem { Title = "Do groceries", IsCompleted = true });
         }
 
         [RelayCommand]
@@ -39,38 +37,8 @@ namespace TodoApp.ViewModels
         private void ToggleComplete(TodoItem item)
         {
             item.IsCompleted = !item.IsCompleted;
-
-            // Optional: force refresh UI
-            var index = Todos.IndexOf(item);
-            Todos.RemoveAt(index);
-            Todos.Insert(index, item);
-        }
-
-        [RelayCommand]
-        private async Task EditTodo(TodoItem item)
-        {
-            if (item == null) return;
-
-            var mainPage = Application.Current?.Windows.FirstOrDefault()?.Page;
-            if (mainPage == null) return;
-
-            string result = await mainPage.DisplayPromptAsync(
-                "Edit Task",
-                "Update the task title:",
-                initialValue: item.Title
-            );
-
-            if (!string.IsNullOrWhiteSpace(result))
-            {
-                item.Title = result;
-
-                // Optional: force UI update
-                var index = Todos.IndexOf(item);
-                Todos.RemoveAt(index);
-                Todos.Insert(index, item);
-            }
         }
     }
 }
-// Compare this snippet from AppShell.xaml.cs:
-// using System;
+// This code defines the MainViewModel class, which is responsible for managing the state and behavior of the main page in a Todo application using .NET MAUI and MVVM pattern.
+// It uses CommunityToolkit.Mvvm for implementing the MVVM pattern, including observable properties and commands.

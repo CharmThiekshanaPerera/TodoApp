@@ -7,5 +7,3 @@ namespace TodoApp.Models
         public bool IsCompleted { get; set; }
     }
 }
-// Compare this snippet from AppShell.xaml.cs:
-// using System;
